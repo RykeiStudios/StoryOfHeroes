@@ -26,7 +26,7 @@
       color: #3a2d1f;
     }
 
-    /* === Section d'accueil avec fond animé === */
+    /* === Section d'accueil === */
     .hero-bg {
       background-image: url('hero_bg.jpg');
       background-size: cover;
@@ -36,68 +36,81 @@
       animation: zoomSlow 30s ease-in-out infinite alternate;
     }
 
-    /* Effet zoom + déplacement lent */
     @keyframes zoomSlow {
-      0% {
-        transform: scale(1) translate(0, 0);
-      }
-      100% {
-        transform: scale(1.1) translate(-20px, -10px);
-      }
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
     }
 
-    /* Légère brume / voile blanc sur l'image */
-    .hero-bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.00);
-      backdrop-filter: blur(1px);
-    }
-
-    /* === Animation d’apparition du logo et du texte === */
+    /* === Animation fade === */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
       animation: fadeInUp 2s ease forwards;
     }
 
-    .fade-in.delay-1 {
-      animation-delay: 0.5s;
-    }
-
-    .fade-in.delay-2 {
-      animation-delay: 1s;
-    }
+    .fade-in.delay-1 { animation-delay: 0.5s; }
+    .fade-in.delay-2 { animation-delay: 1s; }
 
     @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* === Overlay blanche translucide === */
+    /* === Overlay === */
     .overlay {
       background: rgba(255, 255, 255, 0.75);
     }
 
-    /* === Amélioration du rendu du logo PNG === */
+    /* === Logo effet léger === */
     .logo-hero {
       filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5))
               drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
-      image-rendering: auto;
+    }
+
+    /* === Lightbox === */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 1rem;
+      box-shadow: 0 0 25px rgba(255,255,255,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox.show {
+      display: flex;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+      opacity: 0.7;
     }
   </style>
 </head>
 
 <body class="leading-relaxed">
 
-  <!-- Section Hero avec animation -->
+  <!-- Section Hero -->
   <section class="hero-bg h-screen flex items-center justify-center text-center relative">
     <div class="overlay absolute inset-0"></div>
     <div class="relative z-10 p-10">
@@ -127,19 +140,15 @@
     </p>
   </section>
 
-  <!-- Galerie d'images (version agrandie + zoom fluide) -->
+  <!-- Galerie d'images (avec Lightbox) -->
   <section class="bg-white py-20">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl text-center mb-10">Galerie d’images</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        <img src="screen1.jpg" alt="Screenshot 1"
-             class="rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 h-[400px] w-full object-cover">
-        <img src="screen2.jpg" alt="Screenshot 2"
-             class="rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 h-[400px] w-full object-cover">
-        <img src="screen3.jpg" alt="Screenshot 3"
-             class="rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 h-[400px] w-full object-cover">
-        <img src="screen4.jpg" alt="Screenshot 4"
-             class="rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 h-[400px] w-full object-cover">
+        <img src="screen1.jpg" alt="Screenshot 1" class="gallery-img rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 h-[400px] w-full object-cover cursor-pointer">
+        <img src="screen2.jpg" alt="Screenshot 2" class="gallery-img rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 h-[400px] w-full object-cover cursor-pointer">
+        <img src="screen3.jpg" alt="Screenshot 3" class="gallery-img rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 h-[400px] w-full object-cover cursor-pointer">
+        <img src="screen4.jpg" alt="Screenshot 4" class="gallery-img rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 h-[400px] w-full object-cover cursor-pointer">
       </div>
     </div>
   </section>
@@ -187,8 +196,36 @@
     © 2025 Story of Heroes — Développé par Hilal. Tous droits réservés.
   </footer>
 
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span id="lightbox-close" class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Agrandissement">
+  </div>
+
+  <!-- Script JS pour Lightbox -->
+  <script>
+    const images = document.querySelectorAll('.gallery-img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('show');
+      });
+    });
+
+    lightboxClose.addEventListener('click', () => {
+      lightbox.classList.remove('show');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove('show');
+      }
+    });
+  </script>
+
 </body>
 </html>
-
-
-
