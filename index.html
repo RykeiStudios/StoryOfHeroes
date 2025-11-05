@@ -56,15 +56,10 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* === Overlay === */
-    .overlay {
-      background: rgba(255, 255, 255, 0.75);
-    }
-
-    /* === Logo effet léger === */
+    /* === Logo clair sans filtre === */
     .logo-hero {
-      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5))
-              drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.6))
+              drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
     }
 
     /* === Lightbox === */
@@ -110,14 +105,13 @@
 
 <body class="leading-relaxed">
 
-  <!-- Section Hero -->
+  <!-- Section Hero (filtre blanc supprimé) -->
   <section class="hero-bg h-screen flex items-center justify-center text-center relative">
-    <div class="overlay absolute inset-0"></div>
     <div class="relative z-10 p-10">
       <img src="Logo.png" alt="Logo Story of Heroes"
            class="mx-auto w-[700px] mb-6 fade-in delay-1 logo-hero">
       <h1 class="text-5xl font-bold mb-4 fade-in delay-2">Story of Heroes</h1>
-      <p class="text-xl italic text-gray-700 fade-in delay-2 mb-40 mt-0 leading-relaxed">
+      <p class="text-xl italic text-gray-200 fade-in delay-2 mb-40 mt-0 leading-relaxed">
         Un Beat’em All 2D, une bataille sans fin entre un Héros et des Démons...<br>
         ...mais est-ce vraiment cela&nbsp;?
       </p>
@@ -140,7 +134,7 @@
     </p>
   </section>
 
-  <!-- Galerie d'images (avec Lightbox) -->
+  <!-- Galerie d'images (4 images + Lightbox) -->
   <section class="bg-white py-20">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl text-center mb-10">Galerie d’images</h2>
@@ -202,7 +196,7 @@
     <img id="lightbox-img" src="" alt="Agrandissement">
   </div>
 
-  <!-- Script JS pour Lightbox -->
+  <!-- Script Lightbox -->
   <script>
     const images = document.querySelectorAll('.gallery-img');
     const lightbox = document.getElementById('lightbox');
