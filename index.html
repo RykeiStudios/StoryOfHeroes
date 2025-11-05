@@ -101,14 +101,9 @@
   <section class="hero-bg h-screen flex items-center justify-center text-center relative">
     <div class="overlay absolute inset-0"></div>
     <div class="relative z-10 p-10">
-      <!-- Logo animé + correction halo -->
       <img src="Logo.png" alt="Logo Story of Heroes"
            class="mx-auto w-[700px] mb-6 fade-in delay-1 logo-hero">
-
-      <!-- Titre animé -->
       <h1 class="text-5xl font-bold mb-4 fade-in delay-2">Story of Heroes</h1>
-
-      <!-- Sous-titre animé -->
       <p class="text-xl italic text-gray-700 fade-in delay-2 mb-40 mt-0 leading-relaxed">
         Un Beat’em All 2D, une bataille sans fin entre un Héros et des Démons...<br>
         ...mais est-ce vraiment cela&nbsp;?
@@ -132,14 +127,17 @@
     </p>
   </section>
 
-  <!-- Galerie d'images -->
+  <!-- Galerie d'images (version agrandie + zoom fluide) -->
   <section class="bg-white py-20">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl text-center mb-10">Galerie d’images</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <img src="screen1.jpg" alt="Screenshot 1" class="rounded-xl shadow">
-        <img src="screen2.jpg" alt="Screenshot 2" class="rounded-xl shadow">
-        <img src="screen3.jpg" alt="Screenshot 3" class="rounded-xl shadow">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <img src="screen1.jpg" alt="Screenshot 1"
+             class="rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 h-[400px] w-full object-cover">
+        <img src="screen2.jpg" alt="Screenshot 2"
+             class="rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 h-[400px] w-full object-cover">
+        <img src="screen3.jpg" alt="Screenshot 3"
+             class="rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 h-[400px] w-full object-cover">
       </div>
     </div>
   </section>
