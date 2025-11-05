@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Story of Heroes – Beat’em All 2D</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* === Style global === */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #0a0f1f;
+      color: #2c2a28;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cinzel', serif;
+      color: #3a2d1f;
+    }
+
+    /* === Section d'accueil avec fond animé === */
+    .hero-bg {
+      background-image: url('images/hero_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      animation: zoomSlow 30s ease-in-out infinite alternate;
+    }
+
+    /* Effet zoom + déplacement lent */
+    @keyframes zoomSlow {
+      0% {
+        transform: scale(1) translate(0, 0);
+      }
+      100% {
+        transform: scale(1.1) translate(-20px, -10px);
+      }
+    }
+
+    /* Légère brume / voile blanc sur l'image */
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(2px);
+    }
+
+    /* === Animation d’apparition du logo et du texte === */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 2s ease forwards;
+    }
+
+    .fade-in.delay-1 {
+      animation-delay: 0.5s;
+    }
+
+    .fade-in.delay-2 {
+      animation-delay: 1s;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* === Overlay blanche translucide === */
+    .overlay {
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    /* === Amélioration du rendu du logo PNG === */
+    .logo-hero {
+      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5))
+              drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+      image-rendering: auto;
+    }
+  </style>
+</head>
+
+<body class="leading-relaxed">
+
+  <!-- Section Hero avec animation -->
+  <section class="hero-bg h-screen flex items-center justify-center text-center relative">
+    <div class="overlay absolute inset-0"></div>
+    <div class="relative z-10 p-10">
+      <!-- Logo animé + correction halo -->
+      <img src="images/logo.png" alt="Logo Story of Heroes"
+           class="mx-auto w-[700px] mb-6 fade-in delay-1 logo-hero">
+
+      <!-- Titre animé -->
+      <h1 class="text-5xl font-bold mb-4 fade-in delay-2">Story of Heroes</h1>
+
+      <!-- Sous-titre animé -->
+      <p class="text-xl italic text-gray-700 fade-in delay-2 mb-40 mt-0 leading-relaxed">
+        Un Beat’em All 2D, une bataille sans fin entre un Héros et des Démons...<br>
+        ...mais est-ce vraiment cela&nbsp;?
+      </p>
+    </div>
+  </section>
+
+  <!-- Présentation -->
+  <section class="max-w-4xl mx-auto py-20 px-6 text-center bg-[#0f1424] text-white">
+    <h2 class="text-3xl mb-6">Présentation</h2>
+    <p>
+      <strong>Story Of Heroes</strong> est un beat’em all 2D développé sous Unity 6,
+      alliant des mécaniques de combat inspirées des jeux de légende et une profondeur
+      narrative.
+      <br><br>
+      Vous dirigez le redoutable et puissant Kaizen qui dispose de technique de combat,
+      combos,téléportation, esquive et bien d'autres.
+      <br><br>
+      Le joueur progresse à travers des niveaux où des affrontements épiques contre les Démons l'attend....
+mais réserve bien des mysteres....
+    </p>
+  </section>
+
+  <!-- Galerie d'images -->
+  <section class="bg-white py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl text-center mb-10">Galerie d’images</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <img src="images/screen1.jpg" alt="Screenshot 1" class="rounded-xl shadow">
+        <img src="images/screen2.jpg" alt="Screenshot 2" class="rounded-xl shadow">
+        <img src="images/screen3.jpg" alt="Screenshot 3" class="rounded-xl shadow">
+      </div>
+    </div>
+  </section>
+
+  <!-- Galerie vidéo -->
+  <section class="py-20 text-center">
+  <h2 class="text-3xl mb-10">Galerie vidéo</h2>
+  <div class="flex justify-center">
+    <iframe
+  width="800"
+  height="450"
+  src="https://www.youtube.com/embed/G1H6GeR6Sa4"
+  title="Story of Heroes Trailer"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+  class="rounded-xl shadow-lg">
+</iframe>
+
+  </div>
+</section>
+
+
+
+  <!-- Démo WebGL -->
+  <section class="bg-gray-100 py-20 text-center">
+    <h2 class="text-3xl mb-6">Démo WebGL</h2>
+    <p class="mb-6 text-gray-700">Une démo jouable sera bientôt disponible directement ici&nbsp;!</p>
+    <div class="max-w-4xl mx-auto border-4 border-dashed border-gray-400 rounded-2xl py-32 bg-white text-gray-500">
+      <p>🎮 Zone réservée à la future démo WebGL Unity</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="py-20 text-center">
+    <h2 class="text-3xl mb-6">Contact & Réseaux</h2>
+    <p>Suivez le développement de <strong>Story of Heroes</strong>&nbsp;:</p>
+    <div class="mt-8 space-x-6">
+      <a href="#" class="text-yellow-800 hover:underline">Twitter / X</a>
+      <a href="https://www.youtube.com/@rykei69" target="_blank" class="text-yellow-800 hover:underline">YouTube</a>
+      <a href="#" class="text-yellow-800 hover:underline">Itch.io</a>
+      <a href="mailto:contact@storyofheroes.com" class="text-yellow-800 hover:underline">contact@storyofheroes.com</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-300 py-6 text-center text-sm text-gray-600">
+    © 2025 Story of Heroes — Développé par Hilal. Tous droits réservés.
+  </footer>
+
+</body>
+</html>
